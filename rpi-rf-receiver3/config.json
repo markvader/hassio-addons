@@ -1,30 +1,42 @@
 {
-    "name": "RPi RF Receiver 3",
-    "version": "2.05",
-    "slug": "rfreceiver3",
-    "description": "RPi RF Receiver 2 Script",
-    "startup": "application",
-    "arch": [
-      "aarch64",
-      "amd64",
-      "armhf",
-      "i386"
-    ],
-    "boot": "auto",
-    "devices": ["/dev/mem:/dev/mem:rw"],
-    "privileged": ["SYS_RAWIO"],
-    "gpio": "true",
-    "apparmor": "false",
-    "ports": {"5055/tcp": null},
-    "options": {
-  "code": "/share/rpi-rf_receive.py",
-  "requirements": [
-    "rpi-rf"
+  "name": "RF Receiver 3",
+  "version": "2.05",
+  "slug": "rfreceiver3",
+  "description": "433 MHz RF Receiver",
+  "startup": "application",
+  "arch": [
+    "aarch64",
+    "amd64",
+    "armhf",
+    "i386"
   ],
-  "clean": true
-},
-    "schema": {"code": "str",
-	       "requirements": ["str"],
-	       "clean": "bool?"},
-    "map": ["share"]
+  "boot": "auto",
+  "devices": [
+    "/dev/mem:/dev/mem:rw"
+  ],
+  "privileged": [
+    "SYS_RAWIO"
+  ],
+  "gpio": "true",
+  "apparmor": "false",
+  "ports": {
+    "5055/tcp": null
+  },
+  "options": {
+    "code": "/share/rpi-rf_receive.py",
+    "requirements": [
+      "rpi-rf"
+    ],
+    "clean": true
+  },
+  "schema": {
+    "code": "str",
+    "requirements": [
+      "str"
+    ],
+    "clean": "bool?"
+  },
+  "map": [
+    "share"
+  ]
 } 
