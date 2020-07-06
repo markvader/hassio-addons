@@ -1,6 +1,5 @@
- 
 {
-    "name": "Andreas addons repository",
-    "url": "https://github.com/andreasfranz/hassio-addons",
-    "maintainer": "Andreas Franz"
+    "name": "PSallandre addons repository",
+    "url": "https://github.com/psallandre/hassio-addons",
+    "maintainer": "Patrice Sallandre"
 }

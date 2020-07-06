@@ -1,38 +1,56 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+ARG BUILD_FROM=hassioaddons/base:7.2.0
+FROM ${BUILD_FROM}
 
-# Add env 
-ENV LANG C.UTF-8
-RUN apk add --no-cache \
+# Copy root filesystem
+# COPY rootfs /
+
+RUN apk add --no-cache coreutils wget nano \
         jq \
-        py2-pip \
         clang \
         libgcc \
-        gcc-gnat \
         libgc++ \
+        gcc-gnat \
         g++ \
         make \
         libffi-dev \
         openssl-dev \
-        python2-dev \
         mosquitto \
         mosquitto-dev \
         mosquitto-libs \
         mosquitto-clients \
-        py-pip \
-        python \
-        python-dev \
         python3 \
-        python3-dev \
-&& pip install -U pip \
-&& pip3 install -U pip \
-&& pip install -U virtualenv
+        python3-dev
+RUN pip3 install -U pip
+RUN pip3 install -U virtualenv
 
-RUN pip install pyaes
-RUN pip install broadlink
-RUN pip install pycrypto
 # Copy data for add-on
 COPY run.sh /
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
+
+# Build arguments
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_REF
+ARG BUILD_VERSION
+
+# Labels
+LABEL \
+    io.hass.name="RF Receiver" \
+    io.hass.description="433 MHz RF Receiver" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.type="addon" \
+    io.hass.version=${BUILD_VERSION} \
+    maintainer="" \
+    org.opencontainers.image.title="RF Receiver" \
+    org.opencontainers.image.description="433 MHz RF Receiver" \
+    org.opencontainers.image.vendor="" \
+    org.opencontainers.image.authors="" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.url="" \
+    org.opencontainers.image.source="https://github.com/psallandre/hassio-addons" \
+    org.opencontainers.image.documentation="https://github.com/psallandre/hassio-addons/blob/master/README.md" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.revision=${BUILD_REF} \
+    org.opencontainers.image.version=${BUILD_VERSION}

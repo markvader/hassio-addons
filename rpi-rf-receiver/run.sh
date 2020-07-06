@@ -17,7 +17,7 @@ if [ -n "$requirements" ];
 then
     if [ "$clean" == "true" ];
     then
-	rm -rf /data/venv/
+        rm -rf /data/venv/
     fi
     if [ ! -f "/data/venv/bin/activate" ];
     then
@@ -28,4 +28,4 @@ then
     fi
     pip install -U ${requirements}
 fi
-python ${code} 
+python ${code}
