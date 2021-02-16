@@ -45,7 +45,7 @@ rfdevice.enable_rx()
 timestamp = None
 last_code = 0
 last_sent = datetime.min
-command=f"mosquitto_pub -V mqttv311 -h {args.mqtt_host} -p {args.mqtt_port} -t 'sensors/rf/receiver2' -u {args.mqtt_user} -P {args.mqtt_password}"
+command=f"mosquitto_pub -V mqttv311 -h {args.mqtt_host} -p {args.mqtt_port} -t 'sensors/rf/receiver' -u {args.mqtt_user} -P {args.mqtt_password}"
 logging.info("Listening for codes on GPIO " + str(args.gpio))
 while True:
     if rfdevice.rx_code_timestamp != timestamp:

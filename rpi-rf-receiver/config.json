@@ -1,6 +1,6 @@
 {
   "name": "RF Receiver",
-  "version": "2.13",
+  "version": "2.5",
   "slug": "rfreceiver",
   "description": "433 MHz RF Receiver",
   "url": "https://github.com/psallandre/hassio-addons",
@@ -8,21 +8,28 @@
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
   "boot": "auto",
   "hassio_api": true,
-  "homeassistant_api": true,
-  "host_network": true,
+  "services": ["mqtt:need"],
   "devices": ["/dev/mem:/dev/mem:rw"],
   "privileged": ["SYS_RAWIO"],
+  "full_access": true,
   "gpio": "true",
   "apparmor": "false",
   "options": {
-    "code": "/share/rpi-rf_receive.py",
-    "requirements": ["rpi-rf"],
-    "clean": true
+    "log_level": "info",
+    "gpio": 27,
+    "valid_codes": [],
+    "mqtt": {}
   },
   "schema": {
-    "code": "str",
-    "requirements": ["str"],
-    "clean": "bool?"
+    "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
+    "gpio": "int",
+    "valid_codes": ["int"],
+    "mqtt": {
+      "host": "str?",
+      "port": "str?",
+      "user": "str?",
+      "password": "str?"
+    }
   },
-  "map": ["share"]
+  "map": []
 }
