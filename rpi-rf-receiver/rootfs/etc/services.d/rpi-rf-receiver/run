@@ -14,14 +14,14 @@ if ! bashio::services.available "mqtt" && ! bashio::config.exists 'mqtt.host'; t
     bashio::exit.nok "No internal MQTT service found and no MQTT host defined. Please install Mosquitto broker or specify your own."
 else
     if ! bashio::config.exists 'mqtt.host' || ! bashio::config.exists 'mqtt.port'; then
-        bashio::log.info "MQTT host/port settings not configured, trying to auto-discovering ..."
+        bashio::log.info "MQTT host/port settings not configured, trying to auto-discover..."
         MQTT_HOST=$(bashio::services mqtt "host")
         MQTT_PORT=$(bashio::services mqtt "port")
     fi
     bashio::log.info "MQTT_HOST='$MQTT_HOST'"
     bashio::log.info "MQTT_PORT='$MQTT_PORT'"
     if ! bashio::config.exists 'mqtt.user'; then
-        bashio::log.info "MQTT credentials not configured, trying to auto-discovering ..."
+        bashio::log.info "MQTT credentials not configured, trying to auto-discover..."
         MQTT_USER=$(bashio::services mqtt "username")
         MQTT_PASSWORD=$(bashio::services mqtt "password")
     fi
