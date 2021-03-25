@@ -33,10 +33,15 @@ parser.add_argument('--mqtt-host', required=True)
 parser.add_argument('--mqtt-port', required=True)
 parser.add_argument('--mqtt-user', required=True)
 parser.add_argument('--mqtt-password', required=True)
+parser.add_argument('--mqtt-test', required=True)
 args = parser.parse_args()
 
 logging.basicConfig(level=levels.get(args.log_level), datefmt='%Y-%m-%d %H:%M:%S', format='[%(asctime)-15s] %(levelname)s %(module)s: %(message)s', )
 logging.debug(f"rf codes to listen for: {args.valid_codes}")
+
+if args.mqtt_test:
+    logging.info(f"MQTT test messsage: sending 'hello world' to 'test/topic")
+    os.system(f"mosquitto_pub -V mqttv311 -h {args.mqtt_host} -p {args.mqtt_port} -t 'test/topic' -u {args.mqtt_user} -P {args.mqtt_password} -m 'hello world'")
 
 signal.signal(signal.SIGINT, exithandler)
 rfdevice = RFDevice(args.gpio)

@@ -35,6 +35,7 @@ LOG_LEVEL="$(bashio::config 'log_level')"
 GPIO="$(bashio::config 'gpio')"
 VALID_CODES="$(bashio::config 'valid_codes')"
 VALID_CODES=$(echo -n $VALID_CODES | tr '\n' ' ')
+MQTT_TEST="$(bashio::config 'mqtt_test')"
 
-bashio::log.info "Launching command: python3 /rpi-rf_receive.py --log-level $LOG_LEVEL --valid-codes $VALID_CODES -g $GPIO --mqtt-host $MQTT_HOST --mqtt-port $MQTT_PORT --mqtt-user $MQTT_USER --mqtt-password XXXX"
-python3 /usr/bin/rpi-rf-receive.py --log-level $LOG_LEVEL --valid-codes $VALID_CODES -g $GPIO --mqtt-host $MQTT_HOST --mqtt-port $MQTT_PORT --mqtt-user $MQTT_USER --mqtt-password $MQTT_PASSWORD
+bashio::log.info "Launching command: python3 /rpi-rf_receive.py --log-level $LOG_LEVEL --valid-codes $VALID_CODES -g $GPIO --mqtt-host $MQTT_HOST --mqtt-port $MQTT_PORT --mqtt-user $MQTT_USER --mqtt-password XXXX --mqtt-test $MQTT_TEST"
+python3 /usr/bin/rpi-rf-receive.py --log-level $LOG_LEVEL --valid-codes $VALID_CODES -g $GPIO --mqtt-host $MQTT_HOST --mqtt-port $MQTT_PORT --mqtt-user $MQTT_USER --mqtt-password $MQTT_PASSWORD --mqtt-test $MQTT_TEST
