@@ -59,14 +59,14 @@ command = f"mosquitto_pub -V mqttv311 -h {args.mqtt_host} -p {args.mqtt_port} -t
 logging.info("Listening for codes on GPIO " + str(args.gpio))
 while True:
     if rfdevice.rx_code_timestamp != timestamp:
+        timestamp = rfdevice.rx_code_timestamp
         if not args.valid_codes or rfdevice.rx_code in args.valid_codes:
             if rfdevice.rx_code != last_code or (datetime.now() - last_sent).total_seconds() > 3:
-                timestamp = rfdevice.rx_code_timestamp
                 logging.info(f"{rfdevice.rx_code} [pulselength {rfdevice.rx_pulselength}, protocol {rfdevice.rx_proto}]")
                 os.system(f"{command} -m {rfdevice.rx_code}")
                 last_code = rfdevice.rx_code
                 last_sent = datetime.now()
         else:
-            logging.debug(f"received unvalid code: {rfdevice.rx_code}")
-    time.sleep(0.5)
+            logging.debug(f"received invalid code: {rfdevice.rx_code}")
+    time.sleep(0.1)
 rfdevice.cleanup()
