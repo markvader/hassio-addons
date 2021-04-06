@@ -1,0 +1,35 @@
+{
+  "name": "MQTT 2 RF",
+  "version": "1.0",
+  "slug": "mqtt2rf",
+  "description": "MQTT 2 RF",
+  "url": "https://github.com/psallandre/hassio-addons",
+  "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
+  "startup": "application",
+  "boot": "auto",
+  "hassio_api": true,
+  "services": ["mqtt:need"],
+  "devices": ["/dev/mem"],
+  "full_access": true,
+  "gpio": "true",
+  "apparmor": "false",
+  "map": [],
+  "image": "psallandre/hassio-mqtt2rf-{arch}",
+  "options": {
+    "log_level": "info",
+    "gpio": 21,
+    "mqtt": {},
+    "mqtt_test": false
+  },
+  "schema": {
+    "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
+    "gpio": "int",
+    "mqtt": {
+      "host": "str?",
+      "port": "str?",
+      "user": "str?",
+      "password": "str?"
+    },
+    "mqtt_test": "bool"
+  }
+}
