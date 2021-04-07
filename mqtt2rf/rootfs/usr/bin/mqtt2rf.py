@@ -9,11 +9,10 @@ import time
 import logging
 import io, os, shutil
 import paho.mqtt.client as mqtt
+import json
 from datetime import datetime
 from rpi_rf import RFDevice
 
-PROTOCOL = 1
-PULSELENGTH = 350
 MQTT_KEEPALIVE_S = 120
 rfdevice = None
 
@@ -66,9 +65,14 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, message):
     logging.debug(f"message: userdata '{userdata}' message payload '{str(message.payload)}' topic '{message.topic}'")
     try:
-        code = int(message.topic.split("/")[-1])
-        logging.info(f"rf send '{code}' [pulselength {PULSELENGTH}, protocol {PROTOCOL}]")
-        rfdevice.tx_code(code, PROTOCOL, PULSELENGTH)
+        data = json.loads(message.payload)
+        code = data["code"]
+        pulselength = data["pulselength"]
+        protocol = data["protocol"]
+        repeat = data["repeat"]
+        logging.info(f"rf send '{code}' [pulselength {pulselength}, protocol {protocol}, repeat {repeat}]")
+        rfdevice.tx_repeat = args.repeat
+        rfdevice.tx_code(code, protocol, pulselength)
     except Exception as e:
         logging.error(f"exception: '{repr(e)}'")
 
