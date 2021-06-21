@@ -71,7 +71,7 @@ def on_message(client, userdata, message):
         protocol = data["protocol"]
         repeat = data["repeat"]
         logging.info(f"rf send '{code}' [pulselength {pulselength}, protocol {protocol}, repeat {repeat}]")
-        rfdevice.tx_repeat = args.repeat
+        rfdevice.tx_repeat = repeat
         rfdevice.tx_code(code, protocol, pulselength)
     except Exception as e:
         logging.error(f"exception: '{repr(e)}'")
