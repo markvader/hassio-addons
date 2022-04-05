@@ -63,7 +63,7 @@ while True:
         timestamp = rfdevice.rx_code_timestamp
         if not args.valid_codes or rfdevice.rx_code in args.valid_codes:
             if rfdevice.rx_code != last_code or (datetime.now() - last_sent).total_seconds() > 3:
-                logging.info(f"{rfdevice.rx_code} [pulselength {rfdevice.rx_pulselength}, protocol {rfdevice.rx_proto}]")
+                logging.info(f"{rfdevice.rx_code} [pulselength {rfdevice.rx_pulselength}, protocol {rfdevice.rx_proto}, length {rfdevice.rx_bitlength}]")
                 os.system(f"{command} -m {rfdevice.rx_code}")
                 last_code = rfdevice.rx_code
                 last_sent = datetime.now()
