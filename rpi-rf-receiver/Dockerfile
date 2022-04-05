@@ -13,7 +13,7 @@ RUN apk add --no-cache \
         mosquitto-clients \
         nano
 
-RUN pip3 install -U "RPi.GPIO>=0.7.1a2"
+RUN pip3 install -U "RPi.GPIO>=0.7.1a4"
 RUN pip3 install -U rpi-rf
 
 COPY rootfs /
@@ -34,7 +34,7 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="psallandre" \
+    maintainer="markvader" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="" \
