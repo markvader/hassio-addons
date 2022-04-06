@@ -1,6 +1,6 @@
 {
   "name": "RF Receiver",
-  "version": "2.8",
+  "version": "2.7",
   "slug": "rfreceiver",
   "description": "433 MHz RF Receiver",
   "url": "https://github.com/markvader/hassio-addons",
